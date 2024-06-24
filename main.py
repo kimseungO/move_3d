@@ -10,10 +10,6 @@ from airflow.decorators import task
 
 
 # Define path to data
-raw_data_path = "/opt/airflow/data/raw/data__{{ ds }}.csv"
-pred_data_path = "/opt/airflow/data/predict/labels__{{ ds }}.json"
-result_data_path = "/opt/airflow/data/predict/result__{{ ds }}.json"
-
 t2_command = "python3 /opt/airflow/dags/move_3d/app/0011_04_train_model.py"
 t3_command = "python3 /opt/airflow/dags/move_3d/app/0011_05_test_model.py"
 t4_command = "python3 /opt/airflow/dags/move_3d/app/0011_06_test_cvimwrite.py"
@@ -31,11 +27,6 @@ dag = DAG(
     schedule_interval=None,
     dagrun_timeout=timedelta(minutes=20)
 )
-# t1 = BashOperator(
-#     task_id='data_load',
-#     bash_command=t1_command,
-#     dag=dag,
-# )
 
 t2 = BashOperator(
     task_id='train',
