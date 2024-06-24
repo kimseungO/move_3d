@@ -5,7 +5,7 @@ import os
 # 데이터 로드
 column_names = ['input_image', 'csv']
 column_names2 = ['input_image', 'bbox', 'heading', 'type','3d_center_x', '3d_center_y', 'real_width', 'real_length']
-csv_file_path = '/home/dblab/seong_space2/0002_move_3d/data/0001_csv/rect.csv'
+csv_file_path = '/home/dblab/sok/airflow-move_3d/data/0001_csv/rect.csv'
 df = pd.read_csv(csv_file_path, names=column_names, header=None)
 aug_df = pd.DataFrame(columns=column_names2)
 print(df)
@@ -31,4 +31,4 @@ for index, record in df.iterrows():
 
     aug_df = pd.concat([aug_df, pd.DataFrame([new_row])], ignore_index=True)
 
-aug_df.to_csv(f'/home/dblab/seong_space2/0002_move_3d/data/0001_csv/rect2.csv', header=None ,index=False) # csv 증강된 저장
+aug_df.to_csv(f'/home/dblab/sok/airflow-move_3d/data/0001_csv/rect2.csv', header=None ,index=False) # csv 증강된 저장

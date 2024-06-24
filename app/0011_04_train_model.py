@@ -1,3 +1,4 @@
+## clear
 import pandas as pd
 import numpy as np
 import cv2
@@ -7,7 +8,7 @@ import os
 column_names = ['input_image', 'bbox', 'heading', 'type','3d_center_x', '3d_center_y', 'real_width', 'real_length']
 
 # Load data from a CSV file using pandas
-csv_file_path = 'data/0001_csv/0001_01_train.csv'
+csv_file_path = '/opt/airflow/data/0001_csv/0001_01_train.csv'
 data = pd.read_csv(csv_file_path, names=column_names, header=None)
 
 import tensorflow as tf
@@ -49,9 +50,6 @@ fc_layer = Dense(4096, activation='relu')(combined_features)
 # Add additional hidden layers with more nodes
 
 #fc_layer = Dense(2048, activation='relu')(fc_layer)
-fc_layer = Dense(1024, activation='relu')(fc_layer)
-fc_layer = Dense(512, activation='relu')(fc_layer)
-fc_layer = Dense(512, activation='relu')(fc_layer)
 fc_layer = Dense(256, activation='relu')(fc_layer)
 fc_layer = Dense(256, activation='relu')(fc_layer)
 fc_layer = Dense(128, activation='relu')(fc_layer)
@@ -86,7 +84,7 @@ model.summary()
 import numpy as np
 from keras.optimizers import Adam
 from keras.callbacks import EarlyStopping
-npyfolder = 'data/npy/1125/'
+npyfolder = '/opt/airflow/data/npy/1125/'
 # train_images = np.load(npyfolder + 'train_images.npy')  # shape (num_samples, 224, 224, 3)
 # train_depth_maps = np.load('path_to_train_depth_maps.npy')  # shape (num_samples, 224, 224, 1)
 train_bboxes = np.load(npyfolder + 'train_bboxes.npy')  # shape (num_samples, 4)
@@ -103,7 +101,7 @@ model.compile(optimizer=optimizer,
 batch_size = 32
 epochs = 500
 # Early stopping 설정
-early_stopping = EarlyStopping(monitor='mse', patience=10, restore_best_weights=True)
+early_stopping = EarlyStopping(monitor='mse', mode='min', patience=10, restore_best_weights=True)
 history = model.fit(
     [train_3d_head, train_bboxes, train_types], # , train_depth_maps
     [train_3d_centers, train_3d_dims], # , train_3d_head
@@ -114,14 +112,14 @@ history = model.fit(
 )
 loss_history = history.history
 
-model.save("data/train_output/1227/model/0001_01_train.keras")
+model.save("/opt/airflow/data/train_output/1227/model/0001_01_train.keras")
 print("model saved")
 
 
 import pickle
 
 # Save the training history using pickle
-with open('data/train_output/1227/history/0001_01_train.pkl', 'wb') as file:
+with open('/opt/airflow/data/train_output/1227/history/0001_01_train.pkl', 'wb') as file:
     pickle.dump(history.history, file)
 print("history saved")
 # import matplotlib.pyplot as plt

@@ -21,12 +21,12 @@ def yolo_to_xyxy(yolo_coords, image_width, image_height):
 column_names = ['input_image', 'bbox', 'heading', 'type','3d_center_x', '3d_center_y', 'real_width', 'real_length']
 
 # Load data from a CSV file using pandas
-csv_file_path = '/home/dblab/seong_space2/0002_move_3d/data/0001_csv/0001_01_train.csv'
+csv_file_path = '/home/dblab/sok/airflow-move_3d/data/0001_csv/0001_01_train.csv'
 data = pd.read_csv(csv_file_path, names=column_names, header=None)
 
-image_folder = "/home/dblab/seong_space2/0002_move_3d/data/0001_image/"
+image_folder = "/home/dblab/sok/airflow-move_3d/data/0001_image/"
 # outputfolder = "/home/dblab/seong_space2/0000_car_bottom/bmb_bottom_lab/bmb_bottom/bmb_frame/0001_crop_all/"
-outputfolder = "/home/dblab/seong_space2/0002_move_3d/data/1125_train_crop/"
+outputfolder = "/home/dblab/sok/airflow-move_3d/data/1125_train_crop/"
 
 bbox_array = np.empty((0, 4), dtype=int)
 # image_array = np.empty((0, 224, 224), dtype=int)
@@ -72,7 +72,7 @@ for index, row in data.iterrows():
     # 크롭된 이미지를 파일로 저장합니다.
     output_path = f"{outputfolder}{str(index).zfill(4)}_{input_image}"
     cv2.imwrite(output_path, cropped_image)
-npfolder = '/home/dblab/seong_space2/0002_move_3d/data/npy/1125/'
+npfolder = '/home/dblab/sok/airflow-move_3d/data/npy/1125/'
 np.save(npfolder + 'train_bboxes.npy', bbox_array)
 # np.save('path_to_train_images.npy', image_array)
 type_array = type_array.astype(int)

@@ -18,7 +18,7 @@ def merge_rect_files(base_dir, output_file):
     df.to_csv(output_file, index=False, header=False)
     print(f"Merged TXT to CSV saved as {output_file}")
 
-merge_rect_files('/home/dblab/seong_space2/0002_move_3d/data/0001_text/', '/home/dblab/seong_space2/0002_move_3d/data/0001_csv/rect.csv')
+merge_rect_files('/home/dblab/sok/airflow-move_3d/data/0001_text/', '/home/dblab/sok/airflow-move_3d/data/0001_csv/rect.csv')
 
 # 데이터 로드
 # column_names = ['class', '3d_base_x', '3d_base_y', 'input_image', 'imgsize_x', 'imgsize_y', '3d_width', '3d_length', '3d_height', 'bbox','3d_head_x','3d_head_y']

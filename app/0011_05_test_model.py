@@ -4,8 +4,8 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 
 # Load the saved model
-loaded_model = tf.keras.models.load_model('data/train_output/1227/model/0001_01_train.keras') # 200 4fclayer
-npfolder = 'data/npy/1125/'
+loaded_model = tf.keras.models.load_model('/opt/airflow/data/train_output/1227/model/0001_01_train.keras') # 200 4fclayer
+npfolder = '/opt/airflow/data/npy/1125/'
 # Load your test data (adjust the paths accordingly)
 test_3d_head = np.load(f'{npfolder}test_3d_head.npy')
 test_bboxes = np.load(f'{npfolder}test_bboxes.npy')
@@ -31,15 +31,24 @@ print(predicted_3d_dims.shape)
 true_labels_3d_centers = true_labels[0]
 true_labels_3d_dims = true_labels[1]
 
+# log 저장
+file_path = "/opt/airflow/data/test-logs.txt"
+
 predicted_3d_centers_mse = mean_squared_error(true_labels_3d_centers, predicted_3d_centers)
 predicted_3d_centers_mae = mean_absolute_error(true_labels_3d_centers, predicted_3d_centers)
 print(f'predicted_3d_centers_MSE: {predicted_3d_centers_mse}, predicted_3d_centers_MAE: {predicted_3d_centers_mae}')
+
+with open(file_path, "w") as file:
+    file.write(f'predicted_3d_centers_MSE: {predicted_3d_centers_mse}, predicted_3d_centers_MAE: {predicted_3d_centers_mae}')
 
 predicted_3d_dims_mse = mean_squared_error(true_labels_3d_dims, predicted_3d_dims)
 predicted_3d_dims_mae = mean_absolute_error(true_labels_3d_dims, predicted_3d_dims)
 print(f'predicted_3d_dims_MSE: {predicted_3d_dims_mse}, predicted_3d_dims_MAE: {predicted_3d_dims_mae}')
 
+with open(file_path, "a") as file:
+    file.write(f'\npredicted_3d_dims_MSE: {predicted_3d_dims_mse}, predicted_3d_dims_MAE: {predicted_3d_dims_mae}')
 
-np.save('data/train_output/1227/testnpy/predicted_3d_centers_0001_01_train.npy', predicted_3d_centers)
-np.save('data/train_output/1227/testnpy/predicted_3d_dims_0001_01_train.npy', predicted_3d_dims)
+
+np.save('/opt/airflow/data/train_output/1227/testnpy/predicted_3d_centers_0001_01_train.npy', predicted_3d_centers)
+np.save('/opt/airflow/data/train_output/1227/testnpy/predicted_3d_dims_0001_01_train.npy', predicted_3d_dims)
 # np.save('/home/dblab/seong_space2/0002_move_3d/data/train_output/1125/testnpy/predicted_3d_head_0001_06_train.npy', predicted_3d_head)

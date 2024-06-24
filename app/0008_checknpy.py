@@ -1,13 +1,13 @@
 import numpy as np
 
 # cropimg = np.load("/home/dblab/seong_space2/0000_car_bottom/bmb_bottom_lab/bmb_bottom/0003_npy/merged_bbox_images.npy")
-bbox = np.load("data/npy/1125/train_bboxes.npy")
-type = np.load("data/npy/1125/train_types.npy")
-type2 = np.load("data/npy/1125/train_types.npy")
-centers = np.load("data/npy/1125/train_3d_centers.npy")
-dims = np.load("data/npy/1125/train_3d_dims.npy")
-heading = np.load("data/npy/1125/train_3d_head.npy")
-test_3d_dims = np.load("data/train_output/1125/testnpy/predicted_3d_dims_0001_01_train.npy")
+bbox = np.load("/home/dblab/sok/airflow-move_3d/data/npy/1125/train_bboxes.npy")
+type = np.load("/home/dblab/sok/airflow-move_3d/data/npy/1125/train_types.npy")
+type2 = np.load("/home/dblab/sok/airflow-move_3d/data/npy/1125/train_types.npy")
+centers = np.load("/home/dblab/sok/airflow-move_3d/data/npy/1125/train_3d_centers.npy")
+dims = np.load("/home/dblab/sok/airflow-move_3d/data/npy/11255/train_3d_dims.npy")
+heading = np.load("/home/dblab/sok/airflow-move_3d/data/npy/1125/train_3d_head.npy")
+test_3d_dims = np.load("/home/dblab/sok/airflow-move_3d/data/train_output/1125/testnpy/predicted_3d_dims_0001_01_train.npy")
 
 
 # print(cropimg.shape)

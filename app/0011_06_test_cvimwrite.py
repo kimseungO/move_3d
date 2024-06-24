@@ -13,8 +13,8 @@ import pandas as pd
 # input_3d_head = np.load("/home/dblab/seong_space2/0000_car_bottom/3d_stop_obj/data/traintest_npy/test_3d_head.npy")
 
 # # Assuming you have test data for 3D centers and dimensions as well
-test_3d_centers = np.load("data/train_output/1227/testnpy/predicted_3d_centers_0001_01_train.npy")
-test_3d_dims = np.load("data/train_output/1227/testnpy/predicted_3d_dims_0001_01_train.npy")
+test_3d_centers = np.load("/opt/airflow/data/train_output/1227/testnpy/predicted_3d_centers_0001_01_train.npy")
+test_3d_dims = np.load("/opt/airflow/data/train_output/1227/testnpy/predicted_3d_dims_0001_01_train.npy")
 # test_3d_head = np.load("/home/dblab/seong_space2/0000_car_bottom/3d_stop_obj/data/train_output/testnpy/predicted_3d_head_epoch1000_fclayer7.npy")
 
 # print("input image bboxes tupes")
@@ -30,18 +30,18 @@ test_3d_dims = np.load("data/train_output/1227/testnpy/predicted_3d_dims_0001_01
 # print(test_3d_centers.shape)
 # print(test_3d_dims.shape)
 
-outputfolder = "data/test_result_images/1227/"
+outputfolder = "/opt/airflow/data/train_output/1227/"
 
 # Define column names for your data
 # column_names = ['class','x','x2','input_image','x3','x4','x5','x6', 'bbox'] # 'bottom_x', 'bottom_y', '3d_width', '3d_length'
 column_names = ['input_image', 'bbox', 'heading', 'type','3d_center_x', '3d_center_y', 'real_width', 'real_length']
 # truck,1241,200,T_S_0000_00006.jpg,1920,1080,1.74,5.17,1 0.643669 0.170274 0.053571 0.059163 1221 203 1.74 5.13
 # Load data from a CSV file using pandas
-csv_file_path = 'data/0001_csv/0001_01_test.csv'
+csv_file_path = '/opt/airflow/data/0001_csv/0001_01_test.csv'
 data = pd.read_csv(csv_file_path, names=column_names, header=None)
 # data['bbox'] = data['bbox'].astype(float)
 # Load your test data (adjust the paths accordingly)
-image_folder = "data/0001_image/"
+image_folder = "/opt/airflow/data/0001_image/"
 
 def yolo_to_xyxy(yolo_coords, image_width, image_height):
     yolo_coords = yolo_coords.split()
